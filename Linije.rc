@@ -1,0 +1,339 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_REZULTATI DIALOGEX 0, 0, 144, 189
+STYLE DS_SETFONT | WS_POPUP | WS_SYSMENU
+FONT 8, "Tahoma", 400, 0, 0xEE
+BEGIN
+    CONTROL         "",ID_IZLAZ_REZ,"Button",BS_OWNERDRAW | BS_CENTER | 
+                    WS_TABSTOP,48,162,50,14
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,6,51,130,104
+    CONTROL         "",IDC_X,"Button",BS_OWNERDRAW | WS_TABSTOP,124,2,10,8
+END
+
+IDD_LINIJE_DIALOG DIALOGEX 0, 0, 447, 335
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "Tahoma", 400, 0, 0xEE
+BEGIN
+    CONTROL         "",IDC_BUTTON1,"Button",BS_OWNERDRAW | BS_CENTER | 
+                    WS_TABSTOP,419,4,18,14
+    CONTROL         "",IDC_BUTTON2,"Button",BS_OWNERDRAW | BS_CENTER | 
+                    WS_TABSTOP,402,4,18,14
+    CONTROL         "",IDC_BUTTON3,"Button",BS_OWNERDRAW | BS_CENTER | 
+                    WS_TABSTOP,13,4,18,14
+    CONTROL         "",IDC_BUTTON4,"Button",BS_OWNERDRAW | BS_CENTER | 
+                    WS_TABSTOP,392,192,48,12
+    CONTROL         "",IDC_BUTTON5,"Button",BS_OWNERDRAW | WS_TABSTOP,36,27,
+                    71,14
+END
+
+IDD_OPROGRAMU DIALOGEX 0, 0, 207, 155
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_DUGMIC1,"Button",BS_OWNERDRAW | WS_TABSTOP,75,114,
+                    50,14
+    CONTROL         "",IDC_X,"Button",BS_OWNERDRAW | WS_TABSTOP,187,3,10,8
+END
+
+IDD_UNOS_IMENA DIALOGEX 0, 0, 179, 62
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",ID_IZLAZ_IME,"Button",BS_OWNERDRAW | WS_TABSTOP,63,40,
+                    50,14
+    EDITTEXT        IDC_EDIT1,56,20,116,15,ES_AUTOHSCROLL
+END
+
+IDD_INTERNET DIALOGEX 0, 0, 141, 70
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Proveri za noviju verziju..."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Izlaz",IDOK,78,40,50,14
+    LTEXT           "Build verzija Linija:",IDC_STATIC,33,9,60,8
+    LTEXT           "",IDC_STATIC12,95,9,32,8
+    PUSHBUTTON      "Proveri",IDC_BUTTON1,16,40,50,14
+    GROUPBOX        "Proveri na Internetu za noviju",IDC_STATIC,7,24,127,38
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+1                       RT_MANIFEST             "Linije.exe.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR1             CURSOR                  "res\\kursor16.cur"
+IDC_CURSOR2             CURSOR                  "res\\kursor256.cur"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\Linije.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Linije.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_REZULTAT            BITMAP                  "res\\rezultat.bmp"
+IDB_SPLASH              BITMAP                  "res\\splash.bmp"
+ID_BMP_1                BITMAP                  "res\\tabla.bmp"
+ID_XUP                  BITMAP                  "res\\x.bmp"
+ID_XDOWN                BITMAP                  "res\\xklik.bmp"
+ID_XOVER                BITMAP                  "res\\xpreko.bmp"
+ID_XUNACTIVE            BITMAP                  "res\\xneaktivno.bmp"
+ID_MINUP                BITMAP                  "res\\min.bmp"
+ID_MINDOWN              BITMAP                  "res\\minklik.bmp"
+ID_MINOVER              BITMAP                  "res\\minpreko.bmp"
+ID_MINUNACTIVE          BITMAP                  "res\\minneaktivno.bmp"
+ID_SISTEMSKI            BITMAP                  "res\\levodugme.bmp"
+ID_SLEDECE              BITMAP                  "res\\sledece.bmp"
+ID_SLEDECE_KLIK         BITMAP                  "res\\sledeceK.bmp"
+ID_SLEDECE_NEAKTIVNO    BITMAP                  "res\\sledeceU.bmp"
+ID_MENI                 BITMAP                  "res\\meni.bmp"
+ID_IZLAZ                BITMAP                  "res\\izlaz.bmp"
+ID_IZLAZ_KLIK           BITMAP                  "res\\izlaz_klik.bmp"
+ID_OIGRI                BITMAP                  "res\\Oigri.bmp"
+ID_REZULTATI            BITMAP                  "res\\rezultati.bmp"
+ID_XMALO                BITMAP                  "res\\x_malo.bmp"
+ID_XMALO_KLIK           BITMAP                  "res\\x_malo_klik.bmp"
+ID_UNESI                BITMAP                  "res\\unesi.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GIF
+//
+
+IDR_CUBE                GIF                     "res\\cube.gif"
+IDR_CUBEOVER            GIF                     "res\\cubeover.gif"
+IDR_CUBEANIM            GIF                     "res\\cubeanim.gif"
+IDR_CUBEBOOM            GIF                     "res\\cubeboom.gif"
+IDR_KUGLA               GIF                     "res\\kugla.gif"
+IDR_KUGLAOVER           GIF                     "res\\kuglaover.gif"
+IDR_KUGLAANIM           GIF                     "res\\kuglaanim.gif"
+IDR_KUGLABOOM           GIF                     "res\\kuglaboom.gif"
+IDR_ROMB                GIF                     "res\\romb.gif"
+IDR_ROMBOVER            GIF                     "res\\rombover.gif"
+IDR_ROMBAANIM           GIF                     "res\\rombanim.gif"
+IDR_ROMBBOOM            GIF                     "res\\rombboom.gif"
+IDR_TROUGAO             GIF                     "res\\trougao.gif"
+IDR_TROUGAOOVER         GIF                     "res\\trougaoover.gif"
+IDR_TROUGAOANIM         GIF                     "res\\trougaoanim.gif"
+IDR_TROUGAOBOOM         GIF                     "res\\trougaoboom.gif"
+IDR_ZVEZDA              GIF                     "res\\zvezda.gif"
+IDR_ZVEZDAOVER          GIF                     "res\\zvezdaover.gif"
+IDR_ZVEZDAANIM          GIF                     "res\\zvezdaanim.gif"
+IDR_ZVEZDABOOM          GIF                     "res\\zvezdaboom.gif"
+IDR_ZIDIC               GIF                     "res\\zidic.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_POPUP_MENU MENU 
+BEGIN
+    POPUP "Popup menu"
+    BEGIN
+        MENUITEM "N&ova igra",                  CMD_1
+        MENUITEM "S&acuvaj igru",               CMD_2
+        MENUITEM "Uc&itaj igru",                CMD_3
+        MENUITEM "&Kopiraj",                    32777
+        MENUITEM SEPARATOR
+        MENUITEM "Muzika",                      32774
+        MENUITEM "Prepreke",                    32776
+        MENUITEM "&Rezultati",                  CMD_4
+        MENUITEM SEPARATOR
+        MENUITEM "I&nternet",                   32779
+        MENUITEM "&Pomoc",                      32778
+        MENUITEM "O L&inijama",                 CMD_5
+        MENUITEM SEPARATOR
+        MENUITEM "I&zlaz",                      CMD_6
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x29L
+#else
+ FILEFLAGS 0x28L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "Programer: Milan Milanovic"
+            VALUE "CompanyName", "Abell Soft"
+            VALUE "FileDescription", "Linije 1.0"
+            VALUE "FileVersion", "1, 0, 0, 0"
+            VALUE "InternalName", "Linije.exe"
+            VALUE "LegalCopyright", "Copyright (c) 2004. Abell Soft Company. All rights reserved."
+            VALUE "OriginalFilename", "Linije.exe"
+            VALUE "PrivateBuild", "1, 0, 0, 0"
+            VALUE "ProductName", "Linije 1.0"
+            VALUE "ProductVersion", "1, 0, 0, 0"
+            VALUE "SpecialBuild", "1, 0, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_OPROGRAMU, DIALOG
+    BEGIN
+        RIGHTMARGIN, 206
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_UNOS_IMENA, DIALOG
+    BEGIN
+        RIGHTMARGIN, 178
+    END
+
+    IDD_INTERNET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 134
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    32777                   "Kopiraj u Clipboard"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\Linije.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
