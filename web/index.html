@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Linije</title>
+<meta name="description" content="Linije 1.0, logička igra iz 2004. godine, sada u browseru i na telefonu.">
+<meta name="theme-color" content="#0d1530">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Linije">
+<link rel="icon" href="assets/icon-32.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="stage" aria-label="Linije">
+  <div id="inner">
+    <canvas id="screen"></canvas>
+
+    <div id="menu" class="menu" role="menu" hidden>
+      <div class="menu-title">Opcije</div>
+      <button role="menuitem" data-cmd="nova">N<u>o</u>va igra</button>
+      <button role="menuitem" data-cmd="sacuvaj">S<u>a</u>cuvaj igru</button>
+      <button role="menuitem" data-cmd="ucitaj">Uc<u>i</u>taj igru</button>
+      <button role="menuitem" data-cmd="kopiraj"><u>K</u>opiraj</button>
+      <hr>
+      <button role="menuitemcheckbox" data-cmd="muzika">Muzika</button>
+      <button role="menuitemcheckbox" data-cmd="prepreke">Prepreke</button>
+      <button role="menuitem" data-cmd="rezultati"><u>R</u>ezultati</button>
+      <hr>
+      <button role="menuitem" data-cmd="internet">I<u>n</u>ternet</button>
+      <button role="menuitem" data-cmd="pomoc"><u>P</u>omoc</button>
+      <button role="menuitem" data-cmd="oigri">O L<u>i</u>nijama</button>
+      <hr>
+      <button role="menuitem" data-cmd="izlaz">I<u>z</u>laz</button>
+    </div>
+
+    <div id="dlg-rezultati" class="dialog" role="dialog" aria-label="Rezultati" hidden>
+      <img src="assets/rezultati.png" alt="" draggable="false">
+      <button class="x-malo" aria-label="Zatvori"></button>
+      <div class="lista">
+        <table>
+          <thead><tr><th>R.broj</th><th>Ime</th><th>Rezultat</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <button class="izlaz" aria-label="Izlaz"></button>
+    </div>
+
+    <form id="dlg-unos" class="dialog" role="dialog" aria-label="Imate dobar rezultat" hidden>
+      <img src="assets/unesi.png" alt="" draggable="false">
+      <input name="ime" maxlength="20" autocomplete="nickname" aria-label="Unesite ime" spellcheck="false">
+      <button class="izlaz" aria-label="U redu"></button>
+    </form>
+
+    <div id="dlg-oigri" class="dialog" role="dialog" aria-label="O Linijama" hidden>
+      <img src="assets/oigri.png" alt="Linije 1.0. Programer: Milan Milanović. Grafika: Uroš Pavlović. BETA tester: Dragoljub Marjanović." draggable="false">
+      <button class="x-malo" aria-label="Zatvori"></button>
+      <button class="izlaz" aria-label="Izlaz"></button>
+    </div>
+
+    <div id="dlg-poruka" class="msgbox" role="alertdialog" hidden>
+      <div class="msgbox-title"><span>Linije 1.0</span><button class="msgbox-x" aria-label="Zatvori"></button></div>
+      <div class="msgbox-body"><span class="msgbox-icon" aria-hidden="true"></span><p></p></div>
+      <div class="msgbox-buttons"><button class="msgbox-ok">OK</button></div>
+    </div>
+  </div>
+</main>
+
+<div id="splash" role="status">
+  <img src="assets/splash.png" alt="Linije 1.0, (c) 2004. Abell Soft Company. Milan Milanović, Uroš Pavlović" draggable="false">
+  <span id="splash-text">Učitavam grafiku...</span>
+</div>
+
+<div id="bonus" aria-live="polite"><span></span></div>
+
+<footer id="footer">
+  <a href="https://github.com/milanm/Linije" target="_blank" rel="noopener">Linije 1.0 (2004)</a>
+  · <a href="https://github.com/milanm/Linije/releases/latest" target="_blank" rel="noopener">Windows verzija</a>
+</footer>
+
+<script src="game.js"></script>
+</body>
+</html>

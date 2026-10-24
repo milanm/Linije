@@ -1,0 +1,334 @@
+/* Linije 1.0 web: the original 2004 skin, scaled to fit the screen. */
+
+:root {
+  --ui-font: Tahoma, Verdana, "Segoe UI", Geneva, sans-serif;
+  --footer-h: 24px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0d1530 radial-gradient(ellipse at 50% 35%, #24345f 0%, #0d1530 70%);
+  color: #c9d4ee;
+  font: 12px var(--ui-font);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+#stage {
+  position: absolute;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+#inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+
+#screen {
+  display: block;
+  border-radius: 25px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+@media (pointer: fine) {
+  #stage, #stage button, #stage input { cursor: url("assets/kursor.png") 0 0, default; }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* Popup menu, after CNewMenu's XP style with the "Opcije" title. */
+.menu {
+  position: absolute;
+  z-index: 10;
+  width: 124px;
+  padding: 1px 1px 2px;
+  border: 1px solid #787878;
+  background: linear-gradient(to right, #f2f2f2 0 26px, #fdfdfd 26px);
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.35);
+  font: 11px var(--ui-font);
+  color: #000;
+}
+
+.menu-title {
+  height: 18px;
+  margin-bottom: 2px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to right, #9cb6d2, #fdfdfd);
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.menu button {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 21px;
+  padding-left: 32px;
+  border: 1px solid transparent;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.menu button:not(:disabled):hover,
+.menu button:not(:disabled):focus-visible {
+  outline: none;
+  border-color: #0078d7;
+  background: #b3d7f4;
+}
+
+.menu button:disabled { color: #a0a0a0; }
+
+.menu button[aria-checked="true"]::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 6px;
+  height: 9px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
+}
+
+.menu hr {
+  margin: 3px 2px 3px 31px;
+  border: 0;
+  border-top: 1px solid #6d6d6d;
+}
+
+/* Dialogs drawn from the original bitmaps. */
+.dialog {
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.dialog > img { display: block; pointer-events: none; }
+
+.x-malo {
+  position: absolute;
+  width: 17px;
+  height: 14px;
+  background: url("assets/x-malo.png");
+}
+.x-malo:active { background-image: url("assets/x-malo-klik.png"); }
+
+.izlaz {
+  position: absolute;
+  width: 70px;
+  height: 31px;
+  background: url("assets/izlaz.png");
+}
+.izlaz:active { background-image: url("assets/izlaz-klik.png"); }
+
+#dlg-rezultati { width: 215px; height: 307px; }
+#dlg-rezultati .x-malo { left: 186px; top: 4px; }
+#dlg-rezultati .izlaz { left: 73px; top: 264px; }
+
+.lista {
+  position: absolute;
+  left: 9px;
+  top: 83px;
+  width: 195px;
+  height: 169px;
+  overflow: auto;
+  border: 1px solid #a5acb5;
+  background: rgb(195, 204, 235);
+  font: 11px var(--ui-font);
+  color: #000;
+  scrollbar-width: thin;
+  scrollbar-color: #8c96b4 rgb(195, 204, 235);
+}
+.lista::-webkit-scrollbar { width: 12px; height: 12px; }
+.lista::-webkit-scrollbar-track { background: rgb(195, 204, 235); }
+.lista::-webkit-scrollbar-thumb { background: #8c96b4; border: 3px solid rgb(195, 204, 235); border-radius: 6px; }
+
+.lista table { border-collapse: collapse; table-layout: fixed; width: 191px; }
+.lista th, .lista td {
+  overflow: hidden;
+  padding: 0 0 0 6px;
+  text-align: left;
+  white-space: nowrap;
+}
+.lista th {
+  position: sticky;
+  top: 0;
+  height: 25px;
+  border-right: 1px solid #e3e3e3;
+  background: #fff;
+  font: bold 12px var(--ui-font);
+}
+.lista th:nth-child(1) { width: 50px; }
+.lista th:nth-child(2) { width: 83px; }
+.lista th:nth-child(3) { width: 58px; }
+.lista td { height: 17px; }
+.lista tr.izabran td { background: #316ac5; color: #fff; }
+
+#dlg-unos { width: 268px; height: 101px; border-radius: 5px; }
+#dlg-unos input {
+  position: absolute;
+  left: 84px;
+  top: 33px;
+  width: 172px;
+  height: 23px;
+  padding: 0 4px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: 11px var(--ui-font);
+  color: #000;
+}
+#dlg-unos .izlaz { left: 99px; top: 64px; }
+
+#dlg-oigri { width: 310px; height: 250px; }
+#dlg-oigri .x-malo { left: 281px; top: 5px; }
+#dlg-oigri .izlaz { left: 120px; top: 184px; }
+
+/* Windows XP style message box for "Igra je sacuvana !" and friends. */
+.msgbox {
+  position: absolute;
+  z-index: 30;
+  min-width: 190px;
+  border: 1px solid #0831d9;
+  border-radius: 7px 7px 0 0;
+  background: #ece9d8;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.5);
+  font: 11px var(--ui-font);
+  color: #000;
+}
+.msgbox-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 26px;
+  padding: 0 4px 0 7px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(#0997ff, #0053ee 12%, #0050ee 50%, #06f 88%, #0053e3);
+  color: #fff;
+  font: bold 12px "Trebuchet MS", var(--ui-font);
+  text-shadow: 1px 1px #0f1089;
+}
+.msgbox-x {
+  width: 21px;
+  height: 21px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #e48a6f, #c13c13);
+  position: relative;
+}
+.msgbox-x::before, .msgbox-x::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 11px;
+  height: 2px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+.msgbox-x::after { transform: rotate(-45deg); }
+.msgbox-body { display: flex; align-items: center; padding: 16px 18px 10px; }
+.msgbox-body p { margin: 0; }
+.msgbox-buttons { padding: 4px 0 12px; text-align: center; }
+.msgbox-ok {
+  min-width: 75px;
+  height: 23px;
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  background: linear-gradient(#fff, #ece9d8 85%, #d6d0c5);
+}
+.msgbox-ok:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+
+/* Splash screen, keyed on magenta in the original. */
+#splash {
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 240px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  filter: drop-shadow(4px 6px 8px rgba(0, 0, 0, 0.5));
+}
+#splash.vidljiv { opacity: 1; }
+#splash img { display: block; }
+#splash-text {
+  position: absolute;
+  left: 47px;
+  top: 173px;
+  width: 203px;
+  height: 16px;
+  color: #fff;
+  font: 13px Verdana, var(--ui-font);
+  line-height: 16px;
+  text-align: center;
+  white-space: nowrap;
+}
+#splash.ceka { cursor: pointer; }
+#splash.ceka #splash-text { animation: trepni 1.2s ease-in-out infinite; }
+@keyframes trepni { 50% { opacity: 0.45; } }
+
+/* Bonus notification, the original TaskbarNotifier skin. */
+#bonus {
+  position: fixed;
+  z-index: 35;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(var(--footer-h) + 8px + env(safe-area-inset-bottom));
+  width: 148px;
+  height: 120px;
+  background: url("assets/bonus.png");
+  transform: translateY(calc(100% + 40px));
+  transition: transform 0.5s;
+  pointer-events: none;
+}
+#bonus.vidljiv { transform: none; }
+#bonus span {
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  width: 128px;
+  height: 45px;
+  color: #ff0;
+  font: 21px Impact, "Arial Narrow", sans-serif;
+  line-height: 45px;
+  text-align: center;
+  white-space: pre;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: env(safe-area-inset-bottom);
+  height: var(--footer-h);
+  line-height: var(--footer-h);
+  text-align: center;
+  color: #7f8fb3;
+  font-size: 12px;
+}
+footer a { color: #9fb3dc; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+[hidden] { display: none !important; }
