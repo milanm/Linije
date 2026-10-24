@@ -1,7 +1,7 @@
 // Offline support. Pages and code come from the network first so updates
 // show up right away; images and sounds come from the cache first.
 // Bump VERSION to drop old caches.
-const VERSION = 'linije-3';
+const VERSION = 'linije-4';
 const CORE = ['./', 'index.html', 'style.css', 'game.js', 'manifest.webmanifest', 'assets/sprites.json'];
 
 self.addEventListener('install', (e) => {

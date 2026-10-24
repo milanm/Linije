@@ -1,6 +1,6 @@
 # Linije
 
-Logička igra u stilu čuvene igre „Lines” za Windows, napisana u C++-u i MFC-u 2004. godine.
+Logička igra u stilu čuvene igre „Lines” za Windows, napisana u C++-u i MFC-u 2004. godine. Napravio sam je kao deo učenja C++-a i programiranja za Windows.
 
 **Igrajte u browseru: [milanm.github.io/Linije](https://milanm.github.io/Linije/)**. Radi i na telefonu.
 

@@ -16,10 +16,13 @@ html, body {
   font: 12px var(--ui-font);
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
+  /* A game page: no double-tap or pinch zoom, which threw the layout off on phones. */
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 #stage {
-  position: absolute;
+  position: fixed;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -159,6 +162,7 @@ button {
   color: #000;
   scrollbar-width: thin;
   scrollbar-color: #8c96b4 rgb(195, 204, 235);
+  touch-action: pan-x pan-y;
 }
 .lista::-webkit-scrollbar { width: 12px; height: 12px; }
 .lista::-webkit-scrollbar-track { background: rgb(195, 204, 235); }
@@ -186,18 +190,21 @@ button {
 .lista tr.izabran td { background: #316ac5; color: #fff; }
 
 #dlg-unos { width: 268px; height: 101px; border-radius: 5px; }
+/* 16px text keeps iOS from zooming in on focus; scaled back to the original 11px. */
 #dlg-unos input {
   position: absolute;
   left: 84px;
   top: 33px;
-  width: 172px;
-  height: 23px;
-  padding: 0 4px;
+  width: 250.2px;
+  height: 33.5px;
+  padding: 0 5.8px;
   border: 0;
   outline: none;
   background: transparent;
-  font: 11px var(--ui-font);
+  font: 16px var(--ui-font);
   color: #000;
+  transform: scale(0.6875);
+  transform-origin: 0 0;
 }
 #dlg-unos .izlaz { left: 99px; top: 64px; }
 
@@ -263,6 +270,8 @@ button {
 /* Splash screen, keyed on magenta in the original. */
 #splash {
   position: fixed;
+  user-select: none;
+  -webkit-user-select: none;
   z-index: 40;
   left: 50%;
   top: 50%;
@@ -338,18 +347,22 @@ footer {
 footer a { color: #9fb3dc; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* Measures the notch and home indicator areas for the layout code. */
-#safe {
+/* The free space for the game, measured by the browser itself: inside the
+   notch and home indicator safe areas and above the footer. */
+#area {
   position: fixed;
-  inset: 0;
+  top: calc(env(safe-area-inset-top) + 8px);
+  right: calc(env(safe-area-inset-right) + 8px);
+  bottom: calc(var(--footer-h) + env(safe-area-inset-bottom) + 8px);
+  left: calc(env(safe-area-inset-left) + 8px);
   visibility: hidden;
   pointer-events: none;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 /* Phones: the board needs every pixel, and the Windows link doesn't apply. */
 @media (max-width: 559px) {
   footer { display: none; }
+  #area { bottom: calc(env(safe-area-inset-bottom) + 8px); }
   #bonus { bottom: calc(8px + env(safe-area-inset-bottom)); }
 }
 

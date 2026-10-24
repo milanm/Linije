@@ -527,22 +527,14 @@
 
   // ---------- Layout ----------
 
+  // Size the game to #area, which CSS keeps inside the visible screen. Reading
+  // the browser's own box avoids stale innerWidth values that in-app browsers
+  // and rotation can report.
   function fit() {
-    const vv = window.visualViewport;
-    const vw = vv ? vv.width : window.innerWidth;
-    const vh = vv ? vv.height : window.innerHeight;
-    // Keep clear of the notch, the home indicator and the footer.
-    const safe = getComputedStyle($('#safe'));
-    const st = parseFloat(safe.paddingTop) || 0;
-    const sr = parseFloat(safe.paddingRight) || 0;
-    const sb = parseFloat(safe.paddingBottom) || 0;
-    const sl = parseFloat(safe.paddingLeft) || 0;
-    const footerH = $('#footer').offsetHeight || 0;
-    const m = 8;
-    const aw = vw - sl - sr - 2 * m;
-    const ah = vh - st - sb - footerH - 2 * m;
-    const sWide = Math.min(aw / WIDE.w, ah / WIDE.h);
-    const sTall = Math.min(aw / TALL.w, ah / TALL.h);
+    const a = $('#area').getBoundingClientRect();
+    if (!a.width || !a.height) return;
+    const sWide = Math.min(a.width / WIDE.w, a.height / WIDE.h);
+    const sTall = Math.min(a.width / TALL.w, a.height / TALL.h);
     layout = sTall > sWide * 1.1 ? TALL : WIDE;
     scale = Math.min(layout === TALL ? sTall : sWide, MAX_SCALE);
 
@@ -550,8 +542,8 @@
     const h = layout.h * scale;
     stage.style.width = `${w}px`;
     stage.style.height = `${h}px`;
-    stage.style.left = `${sl + m + Math.max(0, (aw - w) / 2)}px`;
-    stage.style.top = `${st + m + Math.max(0, (ah - h) / 2)}px`;
+    stage.style.left = `${a.left + Math.max(0, (a.width - w) / 2)}px`;
+    stage.style.top = `${a.top + Math.max(0, (a.height - h) / 2)}px`;
     inner.style.width = `${layout.w}px`;
     inner.style.height = `${layout.h}px`;
     inner.style.transform = `scale(${scale})`;
@@ -652,9 +644,22 @@
     }
   });
 
+  // iOS ignores user-scalable=no; block its pinch and double-tap zoom here.
+  for (const type of ['gesturestart', 'gesturechange', 'dblclick']) {
+    document.addEventListener(type, (e) => e.preventDefault(), { passive: false });
+  }
+
   document.addEventListener('visibilitychange', updateMusic);
-  window.addEventListener('resize', fit);
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  let fitQueued = false;
+  const queueFit = () => {
+    if (fitQueued) return;
+    fitQueued = true;
+    requestAnimationFrame(() => { fitQueued = false; fit(); });
+  };
+  window.addEventListener('resize', queueFit);
+  window.addEventListener('orientationchange', () => { queueFit(); setTimeout(queueFit, 300); });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', queueFit);
+  if (window.ResizeObserver) new ResizeObserver(queueFit).observe($('#area'));
 
   // ---------- Menu ----------
 
