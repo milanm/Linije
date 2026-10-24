@@ -8,7 +8,7 @@ Logička igra u stilu čuvene igre „Lines” za Windows, napisana u C++-u i MF
 
 ## Igranje u browseru
 
-Web verzija na [milanm.github.io/Linije](https://milanm.github.io/Linije/) zadržava originalnu grafiku, zvuke, muziku, dijaloge i pravila. Kada telefon držite uspravno, desni panel se premešta ispod table, da bi polja bila dovoljno velika za prst. Igru možete dodati na početni ekran telefona, a posle prvog otvaranja radi i bez interneta.
+Web verzija na [milanm.github.io/Linije](https://milanm.github.io/Linije/) zadržava originalnu grafiku, zvuke, muziku, dijaloge i pravila. Na telefonu je tabla veća kada ga okrenete položeno. Igru možete dodati na početni ekran telefona, a posle prvog otvaranja radi i bez interneta.
 
 Sačuvane partije i rezultati čuvaju se u browseru. Trenutna partija se čuva i automatski, pa se ne gubi kada zatvorite stranicu.
 

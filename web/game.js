@@ -1,6 +1,6 @@
 // Linije 1.0 for the web. Game rules, timings and layout follow the 2004
 // MFC original (LinijeDlg.cpp); all coordinates below are pixels in the
-// original 671x544 window.
+// original 671x544 window, which is scaled to fit the screen.
 'use strict';
 
 (() => {
@@ -33,18 +33,6 @@
   const FRAME_MS = 30;
   const MAX_SCALE = 2;
 
-  // Wide is the original window. Tall stacks the right-hand panel under the
-  // board so the cells stay big enough to tap on a phone held upright.
-  // Rects are [sx, sy, w, h, dx, dy]: regions copy from the live scene,
-  // fills and patches copy plain stone from the background bitmap.
-  const WIDE = { w: W0, h: H0, fills: [], regions: [[0, 0, W0, H0, 0, 0]], patches: [] };
-  const TALL = {
-    w: 455,
-    h: 796,
-    fills: [[456, 48, 11, 252, 0, 544], [659, 48, 12, 252, 443, 544]],
-    regions: [[0, 0, 455, 544, 0, 0], [455, 48, 216, 252, 11, 544], [455, 292, 216, 252, 227, 544]],
-    patches: [[452, 405, 3, 60, 452, 470]],
-  };
 
   const SOUNDS = { dodaj: 'AddBall', bonus: 'bonus', kraj: 'GameOver', klik: 'loptica', brisi: 'DelBall' };
   const KEYS = { settings: 'linije.podesavanja', save: 'linije.sav', scores: 'linije.rez', current: 'linije.igra' };
@@ -61,7 +49,6 @@
 
   const IMG = {};
   let SPRITES = {};
-  let layout = WIDE;
   let scale = 1;
   let dirty = true;
   let ready = false;
@@ -511,10 +498,8 @@
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
     ctx.fillStyle = '#3c4256';
-    ctx.fillRect(0, 0, layout.w, layout.h);
-    for (const [sx, sy, w, h, dx, dy] of layout.fills) ctx.drawImage(IMG.tabla, sx, sy, w, h, dx, dy, w, h);
-    for (const [sx, sy, w, h, dx, dy] of layout.regions) ctx.drawImage(scene, sx, sy, w, h, dx, dy, w, h);
-    for (const [sx, sy, w, h, dx, dy] of layout.patches) ctx.drawImage(IMG.tabla, sx, sy, w, h, dx, dy, w, h);
+    ctx.fillRect(0, 0, W0, H0);
+    ctx.drawImage(scene, 0, 0);
   }
 
   function loop(now) {
@@ -533,22 +518,19 @@
   function fit() {
     const a = $('#area').getBoundingClientRect();
     if (!a.width || !a.height) return;
-    const sWide = Math.min(a.width / WIDE.w, a.height / WIDE.h);
-    const sTall = Math.min(a.width / TALL.w, a.height / TALL.h);
-    layout = sTall > sWide * 1.1 ? TALL : WIDE;
-    scale = Math.min(layout === TALL ? sTall : sWide, MAX_SCALE);
-
-    const w = layout.w * scale;
-    const h = layout.h * scale;
+    scale = Math.min(a.width / W0, a.height / H0, MAX_SCALE);
+    const w = W0 * scale;
+    const h = H0 * scale;
     stage.style.width = `${w}px`;
     stage.style.height = `${h}px`;
     stage.style.left = `${a.left + Math.max(0, (a.width - w) / 2)}px`;
     stage.style.top = `${a.top + Math.max(0, (a.height - h) / 2)}px`;
-    inner.style.width = `${layout.w}px`;
-    inner.style.height = `${layout.h}px`;
+    inner.style.width = `${W0}px`;
+    inner.style.height = `${H0}px`;
     inner.style.transform = `scale(${scale})`;
-    canvas.style.width = `${layout.w}px`;
-    canvas.style.height = `${layout.h}px`;
+    inner.style.setProperty('--ui', String(Math.max(1, 1 / scale)));
+    canvas.style.width = `${W0}px`;
+    canvas.style.height = `${H0}px`;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
@@ -559,15 +541,12 @@
     redraw();
   }
 
-  // Layout point to original window point, or null outside every region.
+  // Screen point to original window point, or null outside the window.
   function toOriginal(e) {
     const r = canvas.getBoundingClientRect();
-    const lx = ((e.clientX - r.left) / r.width) * layout.w;
-    const ly = ((e.clientY - r.top) / r.height) * layout.h;
-    for (const [sx, sy, w, h, dx, dy] of layout.regions) {
-      if (lx >= dx && lx < dx + w && ly >= dy && ly < dy + h) return [lx - dx + sx, ly - dy + sy];
-    }
-    return null;
+    const x = ((e.clientX - r.left) / r.width) * W0;
+    const y = ((e.clientY - r.top) / r.height) * H0;
+    return x >= 0 && y >= 0 && x < W0 && y < H0 ? [x, y] : null;
   }
 
   function hitButton(p) {
@@ -745,8 +724,8 @@
   // ---------- Dialogs ----------
 
   function center(el) {
-    el.style.left = `${Math.round((layout.w - el.offsetWidth) / 2)}px`;
-    el.style.top = `${Math.round((layout.h - el.offsetHeight) / 2)}px`;
+    el.style.left = `${Math.round((W0 - el.offsetWidth) / 2)}px`;
+    el.style.top = `${Math.round((H0 - el.offsetHeight) / 2)}px`;
   }
 
   function openModal(el, onClose) {
