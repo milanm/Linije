@@ -322,7 +322,7 @@ protected:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnKillFocus(CWnd* pNewWnd);
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
-	afx_msg UINT OnNcHitTest(CPoint point);
+	afx_msg LRESULT OnNcHitTest(CPoint point);
 	//}}AFX_MSG
 	
 	DECLARE_MESSAGE_MAP()

@@ -32,6 +32,6 @@ public:
 	afx_msg void OnURedu();
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	afx_msg UINT OnNcHitTest(CPoint point);
+	afx_msg LRESULT OnNcHitTest(CPoint point);
 	afx_msg void OnBnClickedIzlazIme();
 };

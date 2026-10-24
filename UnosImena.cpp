@@ -100,7 +100,7 @@ BOOL CUnosImena::OnEraseBkgnd(CDC* pDC)
 	return true;	
 }
 
-UINT CUnosImena::OnNcHitTest(CPoint point)
+LRESULT CUnosImena::OnNcHitTest(CPoint point)
 {
 	CPoint ptClient = point; ScreenToClient( &ptClient );
 	CRect rClient; GetClientRect( &rClient ); rClient.bottom -= 81;

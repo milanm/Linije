@@ -65,7 +65,7 @@ BOOL CDijalogOprogramu::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	return true;
 }
 
-UINT CDijalogOprogramu::OnNcHitTest(CPoint point)
+LRESULT CDijalogOprogramu::OnNcHitTest(CPoint point)
 {
 	CPoint ptClient = point; ScreenToClient( &ptClient );
 	CRect rClient; GetClientRect( &rClient ); rClient.bottom -= 229;

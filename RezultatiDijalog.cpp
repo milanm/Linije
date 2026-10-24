@@ -171,7 +171,7 @@ void CRezultatiDijalog::OnDugme()
 		f.Close();
 		
 		m_rezultati.DeleteAllItems();
-		for(i=0;i<10;i++) 
+		for(int i=0;i<10;i++) 
 		{
 			CString temp; temp.Format("%d",i+1);
 			m_rezultati.InsertItem(i,temp);
@@ -195,7 +195,7 @@ BOOL CRezultatiDijalog::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	return true;
 }
 
-UINT CRezultatiDijalog::OnNcHitTest(CPoint point)
+LRESULT CRezultatiDijalog::OnNcHitTest(CPoint point)
 {
 	CPoint ptClient = point; ScreenToClient( &ptClient );
 	CRect rClient; GetClientRect( &rClient ); rClient.bottom -= 289;

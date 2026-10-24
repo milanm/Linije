@@ -297,7 +297,7 @@ HCURSOR CLinijeDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-UINT CLinijeDlg::OnNcHitTest(CPoint point)
+LRESULT CLinijeDlg::OnNcHitTest(CPoint point)
 {	
 	CPoint ptClient = point; ScreenToClient( &ptClient );
 	CRect rClient; GetClientRect( &rClient ); rClient.bottom -= 517;
