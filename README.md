@@ -44,6 +44,11 @@ The game reads its sounds, music and help file from the folder it runs in, so co
 
 GitHub Actions builds the installer and the ZIP on every push. Pushing a `v*` tag publishes them as a release.
 
+## Credits
+
+- Programming: Milan Milanović
+- Graphics: [Uroš Pavlović](https://rs.linkedin.com/in/urospavlovic)
+
 ---
 
 ## Na srpskom
@@ -51,3 +56,5 @@ GitHub Actions builds the installer and the ZIP on every push. Pushing a `v*` ta
 Linije su logička igra za Windows, napisana u C++/MFC-u 2004. godine. Poslednju verziju preuzmite sa [stranice Releases](https://github.com/milanm/Linije/releases/latest): instaler (`setup.exe`) ili ZIP koji samo raspakujete i pokrenete `Linije.exe`. Radi na Windows 10 i 11, bez administratorskih prava.
 
 Cilj je da poređate 5 ili više istih figura u liniju (vodoravno, uspravno ili dijagonalno). Figura se pomera samo ako do izabranog polja postoji slobodan put. Posle svakog poteza koji ne napravi liniju pojavljuju se tri nove figure, a igra se završava kada se tabla popuni.
+
+Programiranje: Milan Milanović. Grafika: [Uroš Pavlović](https://rs.linkedin.com/in/urospavlovic).
