@@ -676,7 +676,7 @@
   });
 
   async function command(cmd) {
-    if (game.busy && ['nova', 'ucitaj', 'prepreke', 'izlaz'].includes(cmd)) return;
+    if (game.busy && ['nova', 'sacuvaj', 'ucitaj', 'prepreke', 'izlaz'].includes(cmd)) return;
     switch (cmd) {
       case 'nova': newGame(); break;
       case 'sacuvaj': saveGame(); await message('Igra je sacuvana !'); break;
