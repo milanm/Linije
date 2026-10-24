@@ -18,7 +18,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "res"
@@ -158,12 +158,47 @@ def build_help():
                 shutil.copyfile(f, out / f.name)
 
 
+def build_preview():
+    """1200x630 link preview (og:image) from the README screenshot."""
+    fonts = Path("C:/Windows/Fonts")
+    if not (fonts / "trebucbd.ttf").exists():
+        print("Windows fonts not found, skipping the link preview", file=sys.stderr)
+        return
+    w, h = 1200, 630
+    bg = Image.new("RGBA", (w, h))
+    px = bg.load()
+    for y in range(h):
+        for x in range(w):
+            t = min(((((x - w * 0.5) / w) ** 2 + ((y - h * 0.35) / h) ** 2) ** 0.5) / 0.7, 1)
+            px[x, y] = tuple(round(a * (1 - t) + b * t) for a, b in zip((0x24, 0x34, 0x5F), (0x0D, 0x15, 0x30))) + (255,)
+
+    shot = Image.open(ROOT / "screenshots" / "gameplay.png").convert("RGBA")
+    sh = 530
+    shot = shot.resize((round(shot.width * sh / shot.height), sh), Image.LANCZOS)
+    x0, y0 = 50, (h - sh) // 2
+    shadow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    shadow.paste((0, 0, 0, 150), (x0 + 6, y0 + 14), shot.getchannel("A"))
+    bg.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(14)))
+    bg.alpha_composite(shot, (x0, y0))
+
+    draw = ImageDraw.Draw(bg)
+    tx = x0 + shot.width + 45
+    sub = ImageFont.truetype(str(fonts / "segoeui.ttf"), 31)
+    draw.text((tx, 150), "Linije 1.0", font=ImageFont.truetype(str(fonts / "trebucbd.ttf"), 78), fill="white")
+    for i, line in enumerate(["Logička igra iz 2004.", "Igrajte u browseru", "i na telefonu."]):
+        draw.text((tx + 2, 252 + 44 * i), line, font=sub, fill=(201, 212, 238))
+    draw.text((tx + 2, 440), "milanm.github.io/Linije",
+              font=ImageFont.truetype(str(fonts / "segoeuib.ttf"), 26), fill=(0, 255, 0))
+    bg.convert("RGB").save(ASSETS / "og-image.jpg", quality=88, optimize=True, progressive=True)
+
+
 def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
     build_sprites()
     build_bitmaps()
     build_sounds()
     build_help()
+    build_preview()
     print(f"assets written to {ASSETS.relative_to(ROOT)}")
 
 

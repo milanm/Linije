@@ -1,6 +1,6 @@
 // Offline support: serve from cache, refresh the cache in the background.
 // Bump VERSION to drop old caches after a release.
-const VERSION = 'linije-1';
+const VERSION = 'linije-2';
 const CORE = ['./', 'index.html', 'style.css', 'game.js', 'manifest.webmanifest', 'assets/sprites.json'];
 
 self.addEventListener('install', (e) => {
