@@ -46,7 +46,7 @@ GitHub Actions builds the installer and the ZIP on every push. Pushing a `v*` ta
 
 ## Credits
 
-- Programming: Milan Milanović
+- Programming: [Milan Milanović](https://www.linkedin.com/in/milanmilanovic/)
 - Graphics: [Uroš Pavlović](https://rs.linkedin.com/in/urospavlovic)
 
 ---
@@ -57,4 +57,4 @@ Linije su logička igra za Windows, napisana u C++/MFC-u 2004. godine. Poslednju
 
 Cilj je da poređate 5 ili više istih figura u liniju (vodoravno, uspravno ili dijagonalno). Figura se pomera samo ako do izabranog polja postoji slobodan put. Posle svakog poteza koji ne napravi liniju pojavljuju se tri nove figure, a igra se završava kada se tabla popuni.
 
-Programiranje: Milan Milanović. Grafika: [Uroš Pavlović](https://rs.linkedin.com/in/urospavlovic).
+Programiranje: [Milan Milanović](https://www.linkedin.com/in/milanmilanovic/). Grafika: [Uroš Pavlović](https://rs.linkedin.com/in/urospavlovic).
