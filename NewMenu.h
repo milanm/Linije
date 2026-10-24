@@ -840,7 +840,7 @@ protected:
 #endif
 };
 
-#ifdef _AFXDLL
+#if defined(_AFXDLL) || _MFC_VER >= 0x0800
   #if _MFC_VER < 0x0700 
     template<class baseClass>
     const AFX_MSGMAP CNewFrame<baseClass>::messageMap = { &CNewFrame<baseClass>::_GetBaseMessageMap, GetMessageEntries()};
