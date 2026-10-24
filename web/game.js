@@ -530,12 +530,19 @@
   function fit() {
     const vv = window.visualViewport;
     const vw = vv ? vv.width : window.innerWidth;
-    const footer = $('#footer');
-    const footerH = footer.offsetHeight || 0;
-    const vh = (vv ? vv.height : window.innerHeight) - footerH;
+    const vh = vv ? vv.height : window.innerHeight;
+    // Keep clear of the notch, the home indicator and the footer.
+    const safe = getComputedStyle($('#safe'));
+    const st = parseFloat(safe.paddingTop) || 0;
+    const sr = parseFloat(safe.paddingRight) || 0;
+    const sb = parseFloat(safe.paddingBottom) || 0;
+    const sl = parseFloat(safe.paddingLeft) || 0;
+    const footerH = $('#footer').offsetHeight || 0;
     const m = 8;
-    const sWide = Math.min((vw - 2 * m) / WIDE.w, (vh - 2 * m) / WIDE.h);
-    const sTall = Math.min((vw - 2 * m) / TALL.w, (vh - 2 * m) / TALL.h);
+    const aw = vw - sl - sr - 2 * m;
+    const ah = vh - st - sb - footerH - 2 * m;
+    const sWide = Math.min(aw / WIDE.w, ah / WIDE.h);
+    const sTall = Math.min(aw / TALL.w, ah / TALL.h);
     layout = sTall > sWide * 1.1 ? TALL : WIDE;
     scale = Math.min(layout === TALL ? sTall : sWide, MAX_SCALE);
 
@@ -543,8 +550,8 @@
     const h = layout.h * scale;
     stage.style.width = `${w}px`;
     stage.style.height = `${h}px`;
-    stage.style.left = `${Math.max(0, (vw - w) / 2)}px`;
-    stage.style.top = `${Math.max(0, (vh - h) / 2)}px`;
+    stage.style.left = `${sl + m + Math.max(0, (aw - w) / 2)}px`;
+    stage.style.top = `${st + m + Math.max(0, (ah - h) / 2)}px`;
     inner.style.width = `${layout.w}px`;
     inner.style.height = `${layout.h}px`;
     inner.style.transform = `scale(${scale})`;

@@ -299,11 +299,18 @@ button {
   width: 148px;
   height: 120px;
   background: url("assets/bonus.png");
-  transform: translateY(calc(100% + 40px));
-  transition: transform 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(40px);
+  transition: transform 0.5s, opacity 0.5s, visibility 0s 0.5s;
   pointer-events: none;
 }
-#bonus.vidljiv { transform: none; }
+#bonus.vidljiv {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: transform 0.5s, opacity 0.5s;
+}
 #bonus span {
   position: absolute;
   left: 10px;
@@ -330,5 +337,20 @@ footer {
 }
 footer a { color: #9fb3dc; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+
+/* Measures the notch and home indicator areas for the layout code. */
+#safe {
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Phones: the board needs every pixel, and the Windows link doesn't apply. */
+@media (max-width: 559px) {
+  footer { display: none; }
+  #bonus { bottom: calc(8px + env(safe-area-inset-bottom)); }
+}
 
 [hidden] { display: none !important; }
