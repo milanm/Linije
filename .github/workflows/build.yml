@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set version
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            $version = $env:GITHUB_REF_NAME.TrimStart('v')
+          } else {
+            $version = "0.0.0-dev.$($env:GITHUB_SHA.Substring(0, 7))"
+          }
+          "VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Build
+        shell: pwsh
+        run: |
+          $msbuild = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" `
+            -latest -requires Microsoft.VisualStudio.Component.VC.ATLMFC `
+            -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+          if (-not $msbuild) { throw 'No Visual Studio with MFC found' }
+          & $msbuild Linije.sln /m /nologo /v:minimal /p:Configuration=Release /p:Platform=x86
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+
+      - name: Package
+        shell: pwsh
+        run: |
+          $dist = 'dist\Linije'
+          New-Item -ItemType Directory -Force $dist | Out-Null
+          Copy-Item bin\Release\Linije.exe, *.wav, Zvuk.mid, Linije.chm $dist
+
+          Compress-Archive -Path $dist -DestinationPath "dist\Linije-$env:VERSION-portable.zip"
+
+          $iscc = (Get-Command iscc -ErrorAction SilentlyContinue).Source
+          if (-not $iscc) { $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" }
+          & $iscc /Q "/DAppVersion=$env:VERSION" "/DSourceDir=$PWD\$dist" "/O$PWD\dist" installer\Linije.iss
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Linije-${{ env.VERSION }}
+          path: |
+            dist/*.zip
+            dist/*.exe
+
+      - name: Publish release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $files = Get-ChildItem dist -File | ForEach-Object FullName
+          gh release view $env:GITHUB_REF_NAME *> $null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $env:GITHUB_REF_NAME @files --clobber
+          } else {
+            gh release create $env:GITHUB_REF_NAME @files --title "Linije $env:VERSION" --generate-notes
+          }

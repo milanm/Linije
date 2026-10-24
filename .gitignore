@@ -1,0 +1,17 @@
+# Build output
+bin/
+obj/
+dist/
+Debug/
+Release/
+
+# Visual Studio
+.vs/
+*.user
+*.aps
+*.ncb
+*.suo
+*.sdf
+*.VC.db
+*.ipch
+Thumbs.db
