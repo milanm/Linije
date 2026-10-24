@@ -29,7 +29,7 @@ class Cvor
 		H;
 	Tacke roditelj; 
 	int status; 
-	int uListi; i
+	int uListi;
 	int boja; 
 public:
 	Cvor(void);

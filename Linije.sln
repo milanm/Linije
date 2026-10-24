@@ -1,21 +1,22 @@
-Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linije", "Linije.vcproj", "{481B4723-7629-4F25-A515-87F5F49002CC}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linije", "Linije.vcxproj", "{481B4723-7629-4F25-A515-87F5F49002CC}"
 EndProject
 Global
-	GlobalSection(SolutionConfiguration) = preSolution
-		Debug = Debug
-		Release = Release
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
-	GlobalSection(ProjectConfiguration) = postSolution
-		{481B4723-7629-4F25-A515-87F5F49002CC}.Debug.ActiveCfg = Debug|Win32
-		{481B4723-7629-4F25-A515-87F5F49002CC}.Debug.Build.0 = Debug|Win32
-		{481B4723-7629-4F25-A515-87F5F49002CC}.Release.ActiveCfg = Release|Win32
-		{481B4723-7629-4F25-A515-87F5F49002CC}.Release.Build.0 = Release|Win32
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{481B4723-7629-4F25-A515-87F5F49002CC}.Debug|x86.ActiveCfg = Debug|Win32
+		{481B4723-7629-4F25-A515-87F5F49002CC}.Debug|x86.Build.0 = Debug|Win32
+		{481B4723-7629-4F25-A515-87F5F49002CC}.Release|x86.ActiveCfg = Release|Win32
+		{481B4723-7629-4F25-A515-87F5F49002CC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

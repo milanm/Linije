@@ -550,6 +550,9 @@ public:
   void EnableDocking(DWORD dwDockStyle);
 
 private:
+  // Modern ON_WM_* macros refer to ThisClass.
+  typedef CNewFrame<baseClass> ThisClass;
+  typedef baseClass TheBaseClass;
   static const AFX_MSGMAP_ENTRY _messageEntries[];
 
 protected: 
@@ -671,9 +674,9 @@ protected:
     baseClass::OnDestroy();
   }
 
-  afx_msg UINT OnNcHitTest(CPoint point)
+  afx_msg LRESULT OnNcHitTest(CPoint point)
   {
-    UINT nHitCode = baseClass::OnNcHitTest(point);
+    LRESULT nHitCode = baseClass::OnNcHitTest(point);
     // Test Win95/98/me and Win NT 4.0
     if(g_Shell<Win2000 || bRemoteSession)
     {
@@ -840,7 +843,7 @@ protected:
 #endif
 };
 
-#ifdef _AFXDLL
+#if defined(_AFXDLL) || _MFC_VER >= 0x0800
   #if _MFC_VER < 0x0700 
     template<class baseClass>
     const AFX_MSGMAP CNewFrame<baseClass>::messageMap = { &CNewFrame<baseClass>::_GetBaseMessageMap, GetMessageEntries()};

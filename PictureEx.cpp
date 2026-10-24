@@ -1486,7 +1486,7 @@ int CPictureEx::uzmi_oblik(void)
 	return oblik;
 }
 
-UINT CPictureEx::OnNcHitTest(CPoint point)
+LRESULT CPictureEx::OnNcHitTest(CPoint point)
 {
 	return HTCLIENT;
 }

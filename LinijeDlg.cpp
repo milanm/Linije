@@ -219,9 +219,9 @@ BOOL CLinijeDlg::OnInitDialog()
 	CNewMenuHelper myHelper(NEW_MENU_DIALOG_SUBCLASS|NEW_MENU_DIALOG_SYSTEM_MENU);
 
 	HKEY hk;
-	if (RegOpenKey(HKLM, KEY_Linije,&hk)!=ERROR_SUCCESS)
+	if (RegOpenKey(HKCU, KEY_Linije,&hk)!=ERROR_SUCCESS)
 	{
-		RegCreateKey(HKLM, KEY_Linije, &hk);
+		RegCreateKey(HKCU, KEY_Linije, &hk);
 		DWORD val=1;
 		RegSetValueEx(hk, VAL_Muzika, NULL, REG_DWORD, (BYTE*)&val, sizeof(val));
 		RegSetValueEx(hk, VAL_Prepreke, NULL, REG_DWORD, (BYTE*)&val, sizeof(val));
@@ -297,7 +297,7 @@ HCURSOR CLinijeDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-UINT CLinijeDlg::OnNcHitTest(CPoint point)
+LRESULT CLinijeDlg::OnNcHitTest(CPoint point)
 {	
 	CPoint ptClient = point; ScreenToClient( &ptClient );
 	CRect rClient; GetClientRect( &rClient ); rClient.bottom -= 517;
@@ -518,7 +518,7 @@ void CLinijeDlg::OnDestroy()
 	CDialog::OnDestroy();
 
 	HKEY hk;
-	if (RegOpenKey(HKLM, KEY_Linije,&hk)==ERROR_SUCCESS)
+	if (RegOpenKey(HKCU, KEY_Linije,&hk)==ERROR_SUCCESS)
 	{
 		DWORD val;
 		if(pusti_muziku) val = 1;
